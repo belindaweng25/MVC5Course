@@ -20,13 +20,13 @@ namespace MVC5Course.Models
         {
             this.OrderLine = new HashSet<OrderLine>();
         }
-    
+
         public int ProductId { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Required]
         public Nullable<decimal> Price { get; set; }
-        [Required]
+        [Required]     
         public Nullable<bool> Active { get; set; }
         [Required]
         public Nullable<decimal> Stock { get; set; }

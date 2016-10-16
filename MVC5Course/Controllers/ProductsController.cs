@@ -111,7 +111,8 @@ namespace MVC5Course.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Product.Find(id);
-            db.Product.Remove(product);
+            //db.Product.Remove(product);
+            product.IsDelet = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

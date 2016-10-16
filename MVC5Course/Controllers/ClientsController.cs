@@ -26,7 +26,7 @@ namespace MVC5Course.Controllers
                 client = client.Where(p => p.FirstName.Contains(search));
             }
 
-                return View(client.ToList());
+            return View(client.ToList());
         }
 
         public ActionResult Login()

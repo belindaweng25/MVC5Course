@@ -12,11 +12,14 @@ using MVC5Course.Models.ViewModels;
 namespace MVC5Course.Controllers
 {
 
+    //[Authorize(Users = "admin")]
+    //[RequireHttps]
     public class ClientsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
 
         // GET: Clients
+        //[OutputCache(Duration =30, Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index(string search)
         {
             var client = db.Client.Include(c => c.Occupation);
@@ -107,14 +110,24 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
+        //public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            var client = db.Client.Find(id);
+
+            if (TryUpdateModel(client, null, null, new string[] { "IsAdmin" })) {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
             }
+
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(client).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }

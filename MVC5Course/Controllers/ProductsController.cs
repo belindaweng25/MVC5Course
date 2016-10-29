@@ -104,7 +104,6 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var db = repo.UnitOfWork.Context;
 
                 db.Entry(product).State = EntityState.Modified;

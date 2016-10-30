@@ -16,6 +16,7 @@ namespace MVC5Course.Models.ViewModels
         public string FirstName { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         [StringLength(10, ErrorMessage = "MiddleName 最大不得超過 10 個字元")]
         [DisplayName("中間名")]
         public string MiddleName { get; set; }

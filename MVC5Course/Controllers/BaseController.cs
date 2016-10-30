@@ -16,5 +16,5 @@ namespace MVC5Course.Controllers
         {
             this.RedirectToAction("Index").ExecuteResult(this.ControllerContext);
         }
-}
+    }
 }

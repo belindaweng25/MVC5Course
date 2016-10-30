@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using MVC5Course.Models.ViewModels;
+using System.Data.Entity.Validation;
 
 namespace MVC5Course.Controllers
 {
-
-    [LocalDebugOnly]
+    
+    //[LocalDebugOnly]
+    [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
     public class MVController : BaseController
     {        
         [Shardata]
@@ -82,6 +84,12 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("ProductList");
             }
 
+            return View();
+        }
+
+        public ActionResult MyError()
+        {
+            throw new InvalidOperationException("ERROR");
             return View();
         }
     }
